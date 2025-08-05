@@ -26,34 +26,34 @@ func New[T Number](inittal_value T) *Value[T] {
 	}
 }
 
-func (i *Value[T]) getElapsedTime() float64 {
-	return rl.GetTime() - i.startTime
+func (v *Value[T]) getElapsedTime() float64 {
+	return rl.GetTime() - v.startTime
 }
 
-func (i *Value[T]) SetTransition(easingFunc EasingFunction) *Value[T] {
-	i.easingFunc = easingFunc
-	return i
+func (v *Value[T]) SetTransition(easingFunc EasingFunction) *Value[T] {
+	v.easingFunc = easingFunc
+	return v
 }
 
-func (i *Value[T]) SetDuration(duration float64) *Value[T] {
-	i.speed = 1.0 / duration
-	return i
+func (v *Value[T]) SetDuration(duration float64) *Value[T] {
+	v.speed = 1.0 / duration
+	return v
 }
 
-func (i *Value[T]) SetValue(new_value T) *Value[T] {
-	i.start = i.GetValue()
-	i.end = new_value
-	i.startTime = rl.GetTime()
-	return i
+func (v *Value[T]) SetValue(new_value T) *Value[T] {
+	v.start = v.GetValue()
+	v.end = new_value
+	v.startTime = rl.GetTime()
+	return v
 }
 
-func (i *Value[T]) GetValue() T {
-	elapsed := i.getElapsedTime()
-	t := elapsed * i.speed
+func (v *Value[T]) GetValue() T {
+	elapsed := v.getElapsedTime()
+	t := elapsed * v.speed
 	if t >= 1.0 {
-		return i.end
+		return v.end
 	}
-	delta := i.end - i.start
+	delta := v.end - v.start
 	// start + delta * t
-	return T(float64(i.start) + float64(delta)*i.easingFunc(t))
+	return T(float64(v.start) + float64(delta)*v.easingFunc(t))
 }

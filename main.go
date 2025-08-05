@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"raylib/interp"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -26,7 +25,7 @@ func main() {
 			circle_y.SetValue(int32(pos.Y)).SetDuration(1.5).SetTransition(interp.OutBack)
 		}
 		rl.DrawCircle(circle_x.GetValue(), circle_y.GetValue(), 16.0, rl.DarkPurple)
-		rl.DrawText(fmt.Sprintf("%v", rl.GetTime()), 20, 20, 20, rl.Black)
+
 		rl.EndDrawing()
 	}
 }
